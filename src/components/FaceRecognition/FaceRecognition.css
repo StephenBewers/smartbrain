@@ -1,0 +1,10 @@
+.bounding-box {
+  position: absolute;
+  border: 5px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to bottom, #68e0cf, #209dff);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  cursor: pointer;
+}
