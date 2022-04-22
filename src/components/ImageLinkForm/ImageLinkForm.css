@@ -3,7 +3,7 @@
     flex-direction: column;
 }
 
-.form {
+.image-form {
     width: 50%;
     min-width: 360px;
     display: flex;

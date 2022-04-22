@@ -28,7 +28,7 @@ const FaceRecognition = ({ imageUrl, boundingBoxes }) => {
   };
 
   return (
-    <div className="center ma">
+    <div className="center ma pb4">
       <div className="absolute mt2">
         <img
           src={imageUrl}

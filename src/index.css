@@ -17,3 +17,18 @@ button {
   display: flex;
   justify-content: center;
 }
+
+.form-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 40px;
+  left: 0;    
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  flex-direction: column;
+}
