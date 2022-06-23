@@ -46,70 +46,58 @@ class Register extends Component {
     }));
   };
 
-  validName = () => {
-    if (!this.state.registerName.content.length) {
-      this.setState((prevState) => ({
-        registerName: {
-          ...prevState.registerName,
-          valid: false,
-        },
-      }));
-      return false;
-    } else {
-      this.setState((prevState) => ({
-        registerName: {
-          ...prevState.registerName,
-          valid: true,
-        },
-      }));
-      return true;
-    }
+  validateInputLength = (input) => {
+    return input.length ? true : false;
   };
 
-  validEmail = () => {
-    if (!this.state.registerEmail.content.length) {
-      this.setState((prevState) => ({
-        registerEmail: {
-          ...prevState.registerEmail,
-          valid: false,
-        },
-      }));
-      return false;
-    } else {
-      this.setState((prevState) => ({
-        registerEmail: {
-          ...prevState.registerEmail,
-          valid: true,
-        },
-      }));
-      return true;
-    }
+  updateNameState = (valid) => {
+    this.setState((prevState) => ({
+      registerName: {
+        ...prevState.registerName,
+        valid: valid,
+      },
+    }));
   };
 
-  validPassword = () => {
-    if (!this.state.registerPassword.content.length) {
-      this.setState((prevState) => ({
-        registerPassword: {
-          ...prevState.registerPassword,
-          valid: false,
-        },
-      }));
-      return false;
-    } else {
-      this.setState((prevState) => ({
-        registerPassword: {
-          ...prevState.registerPassword,
-          valid: true,
-        },
-      }));
-      return true;
-    }
+  updateEmailState = (valid) => {
+    this.setState((prevState) => ({
+      registerEmail: {
+        ...prevState.registerEmail,
+        valid: valid,
+      },
+    }));
   };
+
+  updatePasswordState = (valid) => {
+    this.setState((prevState) => ({
+      registerPassword: {
+        ...prevState.registerPassword,
+        valid: valid,
+      },
+    }));
+  };
+
+  onKeyDown = (event) => {
+    // Handle return key submit
+    if (event.keyCode === 13) {
+      this.onSubmitRegister();
+    }
+  }
 
   onSubmitRegister = () => {
-    const validName = this.validName();
-    const validEmail = this.validEmail();
-    const validPassword = this.validPassword();
+    const validName = this.validateInputLength(
+      this.state.registerName.content
+    );
+    const validEmail = this.validateInputLength(
+      this.state.registerEmail.content
+    );
+    const validPassword = this.validateInputLength(
+      this.state.registerPassword.content
+    );
+
+    this.updateNameState(validName);
+    this.updateEmailState(validEmail);
+    this.updatePasswordState(validPassword);
 
     if (validName && validEmail && validPassword) {
       fetch("http://localhost:3000/register", {
@@ -142,6 +130,7 @@ class Register extends Component {
               onChange={this.onNameChange}
               className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
               type="text"
+              placeholder="e.g. Jane"
               name="name"
               id="name"
               aria-required="true"
@@ -155,6 +144,7 @@ class Register extends Component {
               onChange={this.onNameChange}
               className="pa2 input-reset ba bg-transparent b--red hover-bg-black hover-white w-100"
               type="text"
+              placeholder="e.g. Jane"
               name="name"
               id="name"
               aria-required="true"
@@ -177,6 +167,7 @@ class Register extends Component {
               onChange={this.onEmailChange}
               className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
               type="email"
+              placeholder="jane@example.com"
               name="email-address"
               id="email-address"
               aria-required="true"
@@ -190,6 +181,7 @@ class Register extends Component {
               onChange={this.onEmailChange}
               className="pa2 input-reset ba bg-transparent b--red hover-bg-black hover-white w-100"
               type="email"
+              placeholder="jane@example.com"
               name="email-address"
               id="email-address"
               aria-required="true"
@@ -210,6 +202,7 @@ class Register extends Component {
           <>
             <input
               onChange={this.onPasswordChange}
+              onKeyDown={this.onKeyDown}
               className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
               type="password"
               name="password"
@@ -223,6 +216,7 @@ class Register extends Component {
           <>
             <input
               onChange={this.onPasswordChange}
+              onKeyDown={this.onKeyDown}
               className="b pa2 input-reset ba bg-transparent b--red hover-bg-black hover-white w-100"
               type="password"
               name="password"
@@ -270,6 +264,7 @@ class Register extends Component {
                 type="submit"
                 value="Register"
                 onClick={this.onSubmitRegister}
+                onKeyDown={this.onKeyDown}
               />
             </div>
           </div>

@@ -18,6 +18,13 @@ class SignIn extends Component {
     this.setState({ signInPassword: event.target.value });
   };
 
+  onKeyDown = (event) => {
+    // Handle return key submit
+    if (event.keyCode === 13) {
+      this.onSubmitSignIn();
+    }
+  }
+
   onSubmitSignIn = () => {
     fetch("http://localhost:3000/login", {
       method: "post",
@@ -75,6 +82,7 @@ class SignIn extends Component {
                 </label>
                 <input
                   onChange={this.onPasswordChange}
+                  onKeyDown={this.onKeyDown}
                   className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                   type="password"
                   name="password"
@@ -89,6 +97,7 @@ class SignIn extends Component {
                 type="submit"
                 value="Sign in"
                 onClick={this.onSubmitSignIn}
+                onKeyDown={this.onKeyDown}
               />
             </div>
             <div className="lh-copy mt3">
