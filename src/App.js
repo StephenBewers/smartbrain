@@ -161,7 +161,7 @@ class App extends Component {
 
   onImageSubmit = () => {
     this.setState({ imageUrl: this.state.input });
-    fetch("http://localhost:3000/image-url", {
+    fetch("https://still-dusk-95539.herokuapp.com/image-url", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -174,7 +174,7 @@ class App extends Component {
           const faces = this.displayFaceBoxes(
             this.calculateFaceLocations(response)
           );
-          fetch("http://localhost:3000/image", {
+          fetch("https://still-dusk-95539.herokuapp.com/image", {
             method: "put",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

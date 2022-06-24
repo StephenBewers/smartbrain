@@ -100,7 +100,7 @@ class Register extends Component {
     this.updatePasswordState(validPassword);
 
     if (validName && validEmail && validPassword) {
-      fetch("http://localhost:3000/register", {
+      fetch("https://still-dusk-95539.herokuapp.com/register", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
