@@ -8,7 +8,7 @@ const Logo = () => {
             <img src={logoImage} alt="SmartBrain logo" className="logo" />
             <div className="heading ph3">
                 <h1 className="bb f2 mv2 pb1">Smart<span className="blue">Brain</span></h1>
-                <span className="f5">Face Recognition</span>
+                <span id="subtitle" className="f5">Face Recognition</span>
             </div>
         </div>
     )

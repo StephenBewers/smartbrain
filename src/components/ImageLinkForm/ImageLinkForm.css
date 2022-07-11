@@ -4,7 +4,7 @@
 }
 
 .image-form {
-    width: 50%;
+    width: 60%;
     min-width: 360px;
     display: flex;
     align-items: center;
@@ -17,4 +17,8 @@
     #fff;
     background-size: 109px 109px, 109px 109px,100% 6px, 109px 109px, 109px 109px;
     background-position: 54px 55px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
+}
+
+.image-form button:hover {
+    background-color: #d5008f;
 }

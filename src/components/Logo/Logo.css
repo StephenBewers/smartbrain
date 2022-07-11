@@ -13,3 +13,18 @@
     align-items: flex-start;
     justify-content: center;
 }
+
+@media (max-width: 600px) {
+    .logo {
+        height: 60px;
+        width: 60px;
+    }
+
+    .heading h1 {
+        font-size: 1.25rem;
+    }
+
+    #subtitle {
+        font-size: .75rem;
+    }
+}

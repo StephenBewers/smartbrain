@@ -95,6 +95,7 @@ const particlesOptions = {
 const initialState = {
   input: "",
   imageUrl: "",
+  validImageUrl: true,
   boundingBoxes: {},
   route: "signIn",
   isSignedIn: false,
@@ -159,13 +160,13 @@ class App extends Component {
     this.setState({ input: event.target.value });
   };
 
-  onImageSubmit = () => {
-    this.setState({ imageUrl: this.state.input });
+  submitImageToClarifai = (imageUrl) => {
+    this.setState({ imageUrl: imageUrl, validImageUrl: true, boundingBoxes: {} });
     fetch("https://still-dusk-95539.herokuapp.com/image-url", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        input: this.state.input,
+        input: imageUrl,
       }),
     })
       .then((response) => response.json())
@@ -184,12 +185,32 @@ class App extends Component {
           })
             .then((response) => response.json())
             .then((count) => {
-              this.setState(Object.assign(this.state.user, { entries: count }));
+              this.setState(
+                Object.assign(this.state.user, { entries: count })
+              );
             })
             .catch((error) => console.error(error));
         }
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+        this.setState({ validImageUrl: false, imageUrl: "", boundingBoxes: {} });
+      });
+  };
+
+  onImageSubmit = () => {
+    if (
+      this.state.input.includes(".jpg") ||
+      this.state.input.includes(".jpeg") ||
+      this.state.input.includes(".png")
+    ) {
+      const imageUrl = this.state.input.split(/[?#]/)[0];
+      this.submitImageToClarifai(imageUrl);
+    } else if (this.state.input === "") {
+      this.submitImageToClarifai("https://smartbrain.stephenbewers.com/example.jpg");
+    } else {
+      this.setState({ validImageUrl: false, imageUrl: "", boundingBoxes: {} });
+    }
   };
 
   onRouteChange = (route) => {
@@ -220,6 +241,7 @@ class App extends Component {
             <ImageLinkForm
               onInputChange={this.onInputChange}
               onImageSubmit={this.onImageSubmit}
+              validImageUrl={this.state.validImageUrl}
             />
             <FaceRecognition
               imageUrl={imageUrl}

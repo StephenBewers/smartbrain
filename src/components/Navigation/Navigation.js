@@ -6,7 +6,7 @@ const Navigation = ({ onRouteChange, isSignedIn }) => {
     return (
       <nav>
         <p
-          className="f4 ph3 link dim underline pointer"
+          className="f5 pl3 link dim underline pointer"
           onClick={() => onRouteChange("signOut")}
         >
           Sign out
@@ -17,13 +17,13 @@ const Navigation = ({ onRouteChange, isSignedIn }) => {
     return (
       <nav>
         <p
-          className="f4 ph3 link dim underline pointer"
+          className="f5 pl3 link dim underline pointer"
           onClick={() => onRouteChange("signIn")}
         >
           Sign in
         </p>
         <p
-          className="f4 ph3 link dim underline pointer"
+          className="f5 pl3 link dim underline pointer"
           onClick={() => onRouteChange("register")}
         >
           Register
