@@ -14,7 +14,7 @@ const ImageLinkForm = ({ onInputChange, onImageSubmit, validImageUrl }) => {
 
   return (
     <div className="container black">
-      <p className="f4 mt4 mb2 mh4">
+      <p className="f5 mt4 mb2 mh4">
         SmartBrain detects faces in your pictures. Paste the URL of an image
         into the box below to detect faces.
       </p>

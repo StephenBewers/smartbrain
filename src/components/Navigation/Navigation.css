@@ -5,9 +5,3 @@ nav {
     align-items: center;
     z-index: 1;
 }
-
-@media (max-width: 600px) {
-    nav p {
-        font-size: 1rem;
-    }
-}

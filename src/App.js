@@ -171,6 +171,10 @@ class App extends Component {
     })
       .then((response) => response.json())
       .then((response) => {
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: "smooth",
+        });
         if (response) {
           const faces = this.displayFaceBoxes(
             this.calculateFaceLocations(response)
@@ -185,16 +189,18 @@ class App extends Component {
           })
             .then((response) => response.json())
             .then((count) => {
-              this.setState(
-                Object.assign(this.state.user, { entries: count })
-              );
+              this.setState(Object.assign(this.state.user, { entries: count }));
             })
             .catch((error) => console.error(error));
         }
       })
       .catch((error) => {
         console.error(error);
-        this.setState({ validImageUrl: false, imageUrl: "", boundingBoxes: {} });
+        this.setState({
+          validImageUrl: false,
+          imageUrl: "",
+          boundingBoxes: {},
+        });
       });
   };
 
@@ -207,7 +213,9 @@ class App extends Component {
       const imageUrl = this.state.input.split(/[?#]/)[0];
       this.submitImageToClarifai(imageUrl);
     } else if (this.state.input === "") {
-      this.submitImageToClarifai("https://smartbrain.stephenbewers.com/example.jpg");
+      this.submitImageToClarifai(
+        "https://smartbrain.stephenbewers.com/example.jpg"
+      );
     } else {
       this.setState({ validImageUrl: false, imageUrl: "", boundingBoxes: {} });
     }

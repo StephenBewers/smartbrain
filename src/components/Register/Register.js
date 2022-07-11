@@ -235,7 +235,7 @@ class Register extends Component {
 
     return (
       <div className="form-container">
-        <div className="pa4 black-80 br2 ba dark-gray b--black-10 mv4 w-100 w-65-m w-35-l mw6 shadow-4 center">
+        <div className="form-style pa4 black-80 br2 ba dark-gray b--black-10 mv4 w-100 w-65-m w-35-l mw6 shadow-4 center">
           <div className="form w-70 center">
             <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
               <legend className="f2 fw6 ph0 mh0">Register</legend>
