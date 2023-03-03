@@ -26,7 +26,7 @@ class SignIn extends Component {
   }
 
   onSubmitSignIn = () => {
-    fetch("https://still-dusk-95539.herokuapp.com/login", {
+    fetch(`${process.env.REACT_APP_API_URL}/login`, {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

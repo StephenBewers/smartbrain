@@ -100,7 +100,7 @@ class Register extends Component {
     this.updatePasswordState(validPassword);
 
     if (validName && validEmail && validPassword) {
-      fetch("https://still-dusk-95539.herokuapp.com/register", {
+      fetch(`${process.env.REACT_APP_API_URL}/register`, {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

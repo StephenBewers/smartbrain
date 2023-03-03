@@ -3,8 +3,7 @@ import Header from "./components/Header/Header";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
 import Rank from "./components/Rank/Rank";
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
-import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles";
+import ParticlesBg from 'particles-bg'
 import { Component } from "react";
 import SignIn from "./components/SignIn/SignIn";
 import Register from "./components/Register/Register";
@@ -13,83 +12,6 @@ window.process = {
   env: {
     NODE_ENV: "development",
   },
-};
-
-const particlesInit = async (main) => {
-  // Particles are initialised
-  await loadFull(main);
-};
-
-const particlesLoaded = (container) => {
-  // Particles are loaded
-};
-
-const particlesOptions = {
-  fpsLimit: 120,
-  interactivity: {
-    events: {
-      onClick: {
-        enable: true,
-        mode: "push",
-      },
-      onHover: {
-        enable: true,
-        mode: "repulse",
-      },
-      resize: true,
-    },
-    modes: {
-      push: {
-        quantity: 4,
-      },
-      repulse: {
-        distance: 100,
-        duration: 0.8,
-      },
-    },
-  },
-  particles: {
-    color: {
-      value: "#ffffff",
-    },
-    links: {
-      color: "#ffffff",
-      distance: 150,
-      enable: true,
-      opacity: 0.35,
-      width: 1,
-    },
-    collisions: {
-      enable: true,
-    },
-    move: {
-      direction: "none",
-      enable: true,
-      outModes: {
-        default: "bounce",
-      },
-      random: false,
-      speed: 0.7,
-      straight: false,
-    },
-    number: {
-      density: {
-        enable: true,
-        area: 800,
-      },
-      value: 50,
-    },
-    opacity: {
-      value: 0.35,
-    },
-    shape: {
-      type: "circle",
-    },
-    size: {
-      value: { min: 1, max: 5 },
-    },
-  },
-  detectRetina: true,
 };
 
 const initialState = {
@@ -162,7 +84,7 @@ class App extends Component {
 
   submitImageToClarifai = (imageUrl) => {
     this.setState({ imageUrl: imageUrl, validImageUrl: true, boundingBoxes: {} });
-    fetch("https://still-dusk-95539.herokuapp.com/image-url", {
+    fetch(`${process.env.REACT_APP_API_URL}/image-url`, {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -170,6 +92,7 @@ class App extends Component {
       }),
     })
       .then((response) => response.json())
+      .then((response) => console.log(response))
       .then((response) => {
         window.scrollTo({
           top: document.body.scrollHeight,
@@ -179,7 +102,7 @@ class App extends Component {
           const faces = this.displayFaceBoxes(
             this.calculateFaceLocations(response)
           );
-          fetch("https://still-dusk-95539.herokuapp.com/image", {
+          fetch(`${process.env.REACT_APP_API_URL}/image`, {
             method: "put",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -235,12 +158,10 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Particles
-          id="tsparticles"
-          className="particles"
-          init={particlesInit}
-          loaded={particlesLoaded}
-          options={particlesOptions}
+        <ParticlesBg
+          type="cobweb"
+          color="#ffffff"
+          bg={true}
         />
         <Header isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} />
         {route === "home" ? (
